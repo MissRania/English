@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { ArrowRight, BookOpen, GraduationCap, CheckCircle, Star, Users, Brain, Zap } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { translations } from '../translations';
+import avatarImg from '../assets/miss-rania.png';
 
 const Home = ({ lang }) => {
   const isAr = lang === 'ar';
@@ -122,9 +123,9 @@ const Home = ({ lang }) => {
                 >
                   <div className="w-full h-full rounded-2xl bg-white/40 dark:bg-slate-900/40 flex items-center justify-center relative overflow-hidden">
                     {/* Placeholder for Pixar Avatar */}
-                    {/* Placeholder for Miss Rania Avatar */}
+                    {/* Miss Rania Avatar */}
                     <img 
-                      src="/src/assets/avatars/miss-rania.png" 
+                      src={avatarImg} 
                       onError={(e) => {
                         e.target.src = "https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=2070&auto=format&fit=crop";
                         e.target.onerror = null;
