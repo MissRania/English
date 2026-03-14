@@ -123,19 +123,22 @@ const Exercises = ({ lang }) => {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <button
                   onClick={handleStartDefault}
-                  className="px-8 py-5 rounded-2xl bg-white dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-800 font-bold dark:text-white hover:border-primary-500 transition-all flex flex-col items-center gap-3 group"
+                  className="px-8 py-5 rounded-3xl bg-white dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-800 font-black dark:text-white hover:border-primary-500 transition-all flex flex-col items-center gap-3 group shadow-sm hover:shadow-2xl active:scale-95"
                 >
-                  <HelpCircle className="text-slate-400 group-hover:text-primary-500 transition-colors" />
-                  <span>{t.startChallenge}</span>
+                  <div className="w-12 h-12 rounded-2xl bg-slate-50 dark:bg-slate-800 flex items-center justify-center group-hover:bg-primary-50 dark:group-hover:bg-primary-900/30 transition-colors">
+                    <HelpCircle className="text-slate-400 group-hover:text-primary-500 transition-colors" />
+                  </div>
+                  <span className="text-sm tracking-wide uppercase">{t.startChallenge}</span>
                 </button>
                 
                 <button
                   onClick={handleGenerateAI}
-                  className="px-8 py-5 rounded-2xl bg-gradient-to-br from-primary-600 to-secondary-600 text-white font-bold shadow-lg shadow-primary-500/20 hover:scale-105 active:scale-95 transition-all flex flex-col items-center gap-3 relative group overflow-hidden"
+                  className="px-8 py-5 rounded-3xl bg-gradient-to-br from-primary-600 to-secondary-600 text-white font-black shadow-xl shadow-primary-500/20 hover:scale-105 active:scale-95 transition-all flex flex-col items-center gap-3 relative group overflow-hidden shiny-effect"
                 >
-                  <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
-                  <Sparkles className="animate-pulse" />
-                  <span className="relative z-10">{t.aiGenerator}</span>
+                  <div className="w-12 h-12 rounded-2xl bg-white/20 flex items-center justify-center">
+                    <Sparkles className="animate-pulse" />
+                  </div>
+                  <span className="relative z-10 text-sm tracking-wide uppercase">{t.aiGenerator}</span>
                 </button>
               </div>
             </motion.div>
