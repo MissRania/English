@@ -122,7 +122,16 @@ const Home = ({ lang }) => {
                 >
                   <div className="w-full h-full rounded-2xl bg-white/40 dark:bg-slate-900/40 flex items-center justify-center relative overflow-hidden">
                     {/* Placeholder for Pixar Avatar */}
-                    <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center brightness-110 contrast-110 opacity-80 group-hover:scale-110 transition-transform duration-700" />
+                    {/* Placeholder for Miss Rania Avatar */}
+                    <img 
+                      src="/src/assets/avatars/miss-rania.png" 
+                      onError={(e) => {
+                        e.target.src = "https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=2070&auto=format&fit=crop";
+                        e.target.onerror = null;
+                      }}
+                      className="absolute inset-0 w-full h-full object-cover brightness-110 contrast-110 opacity-80 group-hover:scale-110 transition-transform duration-700" 
+                      alt="Miss Rania"
+                    />
                     
                     {/* 3D UI Elements floating around */}
                     <motion.div 
