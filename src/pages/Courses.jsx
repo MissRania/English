@@ -94,24 +94,33 @@ const Courses = ({ lang }) => {
     : courses.filter(c => c.level === activeLevel);
 
   return (
-    <div className="pt-24 pb-20 min-h-screen">
+    <div className="pt-32 pb-20 min-h-screen gradient-bg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className={`flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6 ${isAr ? 'md:flex-row-reverse' : ''}`}>
-          <div className={`max-w-xl ${isAr ? 'text-right' : ''}`}>
-            <h1 className="text-4xl md:text-5xl font-display font-bold mb-4 dark:text-white">
-              {isAr ? "استكشف الدروس" : "Explore Courses"}
-            </h1>
-            <p className="text-slate-600 dark:text-slate-400 text-lg">
+        <div className={`flex flex-col lg:flex-row lg:items-end justify-between mb-16 gap-10 ${isAr ? 'lg:flex-row-reverse' : ''}`}>
+          <div className={`max-w-2xl ${isAr ? 'text-right' : ''}`}>
+            <motion.h1 
+              initial={{ opacity: 0, x: isAr ? 20 : -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              className="text-5xl md:text-7xl font-display font-black mb-6 dark:text-white tracking-tighter"
+            >
+              {isAr ? "استكشف " : "Explore "}
+              <span className="gradient-text">Courses</span>
+            </motion.h1>
+            <p className="text-xl text-slate-500 dark:text-slate-400 font-medium">
               {isAr ? "دروس منظمة حسب البرنامج الرسمي التونسي لكل المستويات." : "Structured lessons according to the official Tunisian program for all levels."}
             </p>
           </div>
           
-          <div className="flex items-center space-x-2 bg-slate-100 dark:bg-slate-900 p-1 rounded-2xl shadow-inner">
+          <div className="flex flex-wrap items-center gap-2 bg-white/50 dark:bg-slate-900/50 p-2 rounded-3xl backdrop-blur-md border border-slate-200 dark:border-slate-800 shadow-inner">
             {levels.map((level) => (
               <button
                 key={level.id}
                 onClick={() => setActiveLevel(level.id)}
-                className={`px-6 py-2 rounded-xl text-sm font-bold transition-all duration-300 ${activeLevel === level.id ? 'bg-white dark:bg-slate-800 text-primary-600 shadow-md transform scale-105' : 'text-slate-500 hover:text-slate-700 dark:hover:text-slate-300'}`}
+                className={`px-5 py-2.5 rounded-2xl text-xs font-black uppercase tracking-widest transition-all duration-300 ${
+                  activeLevel === level.id 
+                    ? 'bg-primary-600 text-white shadow-xl shadow-primary-500/30 scale-105' 
+                    : 'text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800'
+                }`}
               >
                 {level.name}
               </button>
@@ -120,21 +129,21 @@ const Courses = ({ lang }) => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-          {filteredCourses.map((course) => (
+          {filteredCourses.map((course, idx) => (
             <motion.div
               layout
               key={course.id}
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.3 }}
-              className="glass-card dark:glass-card-dark rounded-[32px] overflow-hidden group border-2 border-transparent hover:border-primary-500/20 transition-all cursor-pointer shadow-xl hover:shadow-2xl"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: idx * 0.1 }}
+              className="glass-card dark:glass-card-dark rounded-[40px] overflow-hidden group border border-transparent hover:border-primary-500/30 transition-all cursor-pointer shadow-xl hover:shadow-2xl relative"
             >
-              <div className="h-56 overflow-hidden relative">
-                <img src={course.image} alt={course.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                <div className={`absolute bottom-4 ${isAr ? 'right-4 flex-row-reverse' : 'left-4'} flex gap-2`}>
+              <div className="h-64 overflow-hidden relative">
+                <img src={course.image} alt={course.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000" />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent opacity-80" />
+                <div className={`absolute bottom-6 ${isAr ? 'right-6 flex-row-reverse' : 'left-6'} flex gap-2`}>
                   {course.tags.map(tag => (
-                    <span key={tag} className="px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-white text-[10px] uppercase font-bold tracking-wider border border-white/20">
+                    <span key={tag} className="px-4 py-1.5 rounded-xl bg-primary-500/20 backdrop-blur-xl text-primary-200 text-[10px] uppercase font-black tracking-widest border border-primary-500/30">
                       {tag}
                     </span>
                   ))}

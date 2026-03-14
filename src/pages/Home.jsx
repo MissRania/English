@@ -44,16 +44,24 @@ const Home = ({ lang }) => {
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 gradient-bg">
         {/* Background Elements */}
-        <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10">
+        <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10 bg-slate-50/50 dark:bg-transparent">
           <motion.div 
-            animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
-            transition={{ duration: 10, repeat: Infinity }}
-            className="absolute -top-1/4 -right-1/4 w-1/2 h-1/2 bg-primary-200/40 rounded-full blur-3xl dark:bg-primary-900/20" 
+            animate={{ 
+              scale: [1, 1.2, 1], 
+              opacity: [0.3, 0.6, 0.3],
+              rotate: [0, 90, 0]
+            }}
+            transition={{ duration: 15, repeat: Infinity }}
+            className="absolute -top-1/4 -right-1/4 w-3/4 h-3/4 bg-primary-400/20 rounded-full blur-[120px] dark:bg-primary-900/30" 
           />
           <motion.div 
-            animate={{ scale: [1, 1.3, 1], opacity: [0.2, 0.4, 0.2] }}
-            transition={{ duration: 8, repeat: Infinity, delay: 2 }}
-            className="absolute -bottom-1/4 -left-1/4 w-1/2 h-1/2 bg-secondary-200/40 rounded-full blur-3xl dark:bg-secondary-900/20" 
+            animate={{ 
+              scale: [1, 1.3, 1], 
+              opacity: [0.2, 0.5, 0.2],
+              rotate: [0, -90, 0]
+            }}
+            transition={{ duration: 12, repeat: Infinity, delay: 2 }}
+            className="absolute -bottom-1/4 -left-1/4 w-3/4 h-3/4 bg-secondary-400/20 rounded-full blur-[120px] dark:bg-secondary-900/30" 
           />
         </div>
 
@@ -78,9 +86,9 @@ const Home = ({ lang }) => {
                 </span>
               </motion.div>
               
-              <h1 className="text-5xl md:text-7xl font-display font-bold leading-tight mb-6 dark:text-white">
+              <h1 className="text-6xl md:text-8xl font-display font-black leading-[1.1] mb-8 dark:text-white tracking-tight">
                 {t.heroTitle.split('Miss Rania')[0]}
-                <span className="gradient-text">Miss Rania</span>
+                <span className="gradient-text drop-shadow-[0_0_30px_rgba(99,102,241,0.3)]">Miss Rania</span>
                 {t.heroTitle.split('Miss Rania')[1]}
               </h1>
               
@@ -89,11 +97,11 @@ const Home = ({ lang }) => {
               </p>
               
               <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4">
-                <Link to="/courses" className="btn-primary flex items-center space-x-2">
-                  <span>{t.cta1}</span>
-                  <ArrowRight size={20} className={isAr ? "rotate-180" : ""} />
+                <Link to="/courses" className="btn-primary shiny-effect flex items-center space-x-2 group">
+                  <span className="relative z-10">{t.cta1}</span>
+                  <ArrowRight size={20} className={`relative z-10 transition-transform duration-300 group-hover:translate-x-1 ${isAr ? "rotate-180 group-hover:-translate-x-1" : ""}`} />
                 </Link>
-                <Link to="/bac-prep" className="px-6 py-3 rounded-full border-2 border-primary-600/20 text-primary-600 font-semibold hover:bg-primary-50 transition-all dark:border-primary-500/30 dark:text-primary-400 dark:hover:bg-primary-950/20">
+                <Link to="/bac-prep" className="px-8 py-4 rounded-2xl border-2 border-primary-500/10 text-slate-700 font-bold hover:bg-white hover:border-primary-500/30 transition-all dark:border-primary-500/20 dark:text-primary-300 dark:hover:bg-primary-950/30 shadow-sm">
                   {t.cta2}
                 </Link>
               </div>
@@ -169,31 +177,47 @@ const Home = ({ lang }) => {
       </section>
 
       {/* Features Grid */}
-      <section className="py-24 bg-white dark:bg-slate-950 relative overflow-hidden">
+      <section className="py-32 bg-white dark:bg-slate-950 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-display font-bold mb-4 dark:text-white">
+          <div className="text-center mb-20 flex flex-col items-center">
+            <motion.h2 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-4xl md:text-6xl font-display font-black mb-6 dark:text-white tracking-tight"
+            >
               {t.whyTitle}
-            </h2>
-            <p className="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
+            </motion.h2>
+            <motion.p 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="text-xl text-slate-500 dark:text-slate-400 max-w-2xl mx-auto font-medium"
+            >
               {t.whySubtitle}
-            </p>
+            </motion.p>
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
             {content.features.map((feature, idx) => (
               <motion.div
                 key={idx}
-                whileHover={{ y: -10 }}
-                className="p-8 rounded-3xl bg-slate-50 dark:bg-slate-900/50 border border-slate-100 dark:border-slate-800 transition-all duration-300 group"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.1 }}
+                whileHover={{ y: -15, scale: 1.02 }}
+                className="p-10 rounded-[40px] bg-slate-50/50 dark:bg-slate-900/30 border border-slate-100 dark:border-primary-900/10 transition-all duration-500 group relative overflow-hidden shiny-effect shadow-sm hover:shadow-2xl"
               >
-                <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-6 bg-${feature.color}-100 dark:bg-${feature.color}-900/20 transform group-hover:scale-110 transition-transform duration-300`}>
-                  {feature.icon}
+                <div className={`w-20 h-20 rounded-[30px] flex items-center justify-center mb-8 bg-${feature.color}-100 dark:bg-${feature.color}-900/20 transform group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 shadow-inner`}>
+                  {React.cloneElement(feature.icon, { size: 32 })}
                 </div>
-                <h3 className="text-xl font-bold mb-4 dark:text-white">{feature.title}</h3>
-                <p className="text-slate-600 dark:text-slate-400">
+                <h3 className="text-2xl font-black mb-4 dark:text-white tracking-tight">{feature.title}</h3>
+                <p className="text-slate-600 dark:text-slate-400 leading-relaxed font-medium">
                   {feature.desc}
                 </p>
+                <div className={`absolute -bottom-10 -right-10 w-32 h-32 bg-${feature.color}-400/10 rounded-full blur-3xl transition-opacity group-hover:opacity-100 opacity-50`} />
               </motion.div>
             ))}
           </div>
@@ -201,7 +225,7 @@ const Home = ({ lang }) => {
       </section>
 
       {/* Level Selection Section */}
-      <section className="py-24 bg-slate-50 dark:bg-slate-900/30">
+      <section className="py-32 bg-slate-50 dark:bg-slate-900/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-5xl font-display font-bold mb-12 dark:text-white">
             {t.levelSelectionTitle}

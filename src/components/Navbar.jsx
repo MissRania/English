@@ -33,16 +33,27 @@ const Navbar = ({ darkMode, toggleDarkMode, lang, setLang }) => {
   };
 
   return (
-    <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'py-2 bg-white/80 dark:bg-slate-900/80 backdrop-blur-lg shadow-lg' : 'py-4 bg-transparent'}`}>
+    <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
+      scrolled 
+        ? 'py-3' 
+        : 'py-6'
+    }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+        <div className={`transition-all duration-500 rounded-3xl ${
+          scrolled 
+            ? 'glass-card dark:glass-card-dark px-6 py-3 shadow-[0_8px_32px_rgba(0,0,0,0.1)]' 
+            : 'bg-transparent px-2 py-0'
+        } flex items-center justify-between`}>
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2 group">
-            <div className="w-10 h-10 bg-gradient-to-br from-primary-600 to-secondary-600 rounded-xl flex items-center justify-center transform group-hover:rotate-12 transition-transform duration-300 shadow-lg shadow-primary-500/20">
-              <span className="text-white font-bold text-xl">R</span>
-            </div>
-            <span className="text-2xl font-display font-bold tracking-tight dark:text-white">
-              MISS <span className="gradient-text">RANIA</span>
+          <Link to="/" className="flex items-center space-x-3 group">
+            <motion.div 
+              whileHover={{ rotate: 10, scale: 1.1 }}
+              className="w-10 h-10 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-xl flex items-center justify-center shadow-lg shadow-primary-500/30"
+            >
+              <span className="text-white font-black text-xl italic">R</span>
+            </motion.div>
+            <span className="text-xl font-display font-black tracking-tighter dark:text-white flex items-center">
+              MISS <span className="gradient-text ml-1.5 drop-shadow-sm">RANIA</span>
             </span>
           </Link>
 
@@ -52,10 +63,20 @@ const Navbar = ({ darkMode, toggleDarkMode, lang, setLang }) => {
               <Link
                 key={link.path}
                 to={link.path}
-                className={`flex items-center space-x-1 px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${location.pathname === link.path ? 'bg-primary-50 text-primary-600 dark:bg-primary-900/30 dark:text-primary-400' : 'text-slate-600 hover:text-primary-600 hover:bg-slate-50 dark:text-slate-300 dark:hover:bg-slate-800'}`}
+                className={`relative px-4 py-2 text-sm font-bold tracking-wide transition-all duration-300 group
+                  ${location.pathname === link.path 
+                    ? 'text-primary-600 dark:text-primary-400' 
+                    : 'text-slate-600 dark:text-slate-300 hover:text-primary-500'}
+                `}
               >
-                {link.icon}
-                <span>{link.name}</span>
+                <span className="relative z-10">{link.name}</span>
+                {location.pathname === link.path && (
+                  <motion.div 
+                    layoutId="nav-pill"
+                    className="absolute inset-0 bg-primary-100/50 dark:bg-primary-900/30 rounded-full -z-0"
+                  />
+                )}
+                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-primary-500 to-secondary-500 group-hover:w-full transition-all duration-300" />
               </Link>
             ))}
           </div>
@@ -64,22 +85,19 @@ const Navbar = ({ darkMode, toggleDarkMode, lang, setLang }) => {
           <div className="hidden lg:flex items-center space-x-3">
             <button
               onClick={handleToggleLang}
-              className="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors dark:text-white flex items-center space-x-2 font-bold text-xs"
+              className="p-2.5 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors dark:text-white flex items-center space-x-2 font-bold text-[10px] tracking-widest uppercase"
               title="Toggle Language"
             >
-              <Globe size={18} />
-              <span>{lang.toUpperCase()}</span>
+              <Globe size={16} className="text-primary-500" />
+              <span>{lang}</span>
             </button>
             <button
               onClick={toggleDarkMode}
-              className="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors dark:text-white"
+              className="p-2.5 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-all duration-300 dark:text-white hover:rotate-12"
             >
-              {darkMode ? <Sun size={20} /> : <Moon size={20} />}
+              {darkMode ? <Sun size={18} className="text-yellow-500" /> : <Moon size={18} className="text-primary-600" />}
             </button>
-            <Link to="/dashboard" className="p-2 rounded-full bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 transition-colors dark:text-slate-300" title={t.dashboard}>
-              <LayoutDashboard size={20} />
-            </Link>
-            <Link to="/contact" className="btn-primary py-2 px-5 text-sm">
+            <Link to="/contact" className="btn-primary py-2.5 px-6 text-sm shiny-effect">
               {t.contact}
             </Link>
           </div>
