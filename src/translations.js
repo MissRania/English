@@ -58,9 +58,9 @@ export const translations = {
     },
     about: {
       title: 'Bonjour, je suis Miss Rania',
-      subtitle: 'Enseignante dévouée d\'anglais en Tunisie avec plus de 10 ans d\'expérience.',
+      subtitle: 'Professeure Agrégée d\'anglais avec plus de 20 ans d\'expérience dans les lycées tunisiens.',
       journeyTitle: 'Parcours Professionnel',
-      journeyDesc: 'Ancienne enseignante dans des lycées de renom, dédiée à la création d\'outils numériques performants.',
+      journeyDesc: 'Professeure agrégée ayant exercé dans les lycées tunisiens les plus prestigieux, dédiée à l\'excellence pédagogique.',
       philosophyTitle: 'Philosophie d\'Enseignement',
       philosophyDesc: 'L\'éducation doit être fun, interactive et adaptée à l\'élève moderne.',
       yearsExp: 'Années d\'Expérience',
@@ -128,9 +128,9 @@ export const translations = {
     },
     about: {
       title: 'مرحباً، أنا ميس رانيا',
-      subtitle: 'مدرسة لغة إنجليزية في تونس مع أكثر من 10 سنوات من الخبرة.',
+      subtitle: 'أستاذة مبرزة في اللغة الإنجليزية مع أكثر من 20 سنة من الخبرة في المعاهد الثانوية التونسية.',
       journeyTitle: 'المسيرة المهنية',
-      journeyDesc: 'مدرسة سابقة في معاهد مرموقة، أركز الآن على بناء أفضل منصة تعليمية رقمية في تونس.',
+      journeyDesc: 'أستاذة مبرزة عملت في أعرق المعاهد التونسية، تضع خبرتها الطويلة الآن لتطوير أفضل منصة تعليمية رقمية.',
       philosophyTitle: 'فلسفة التدريس',
       philosophyDesc: 'يجب أن يكون التعليم ممتعاً وتفاعلياً ومناسباً لطالب العصر الحديث.',
       yearsExp: 'سنوات الخبرة',

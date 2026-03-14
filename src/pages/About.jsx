@@ -9,7 +9,7 @@ const About = ({ lang }) => {
   const t = translations[lang === 'fr' ? 'fr' : 'ar'].about;
 
   const stats = [
-    { label: t.yearsExp, value: '10+', icon: <Award size={24} /> },
+    { label: t.yearsExp, value: '20+', icon: <Award size={24} /> },
     { label: t.activeStudents, value: '5000+', icon: <Users size={24} /> },
     { label: t.successRate, value: '98%', icon: <Star size={24} /> },
     { label: t.videoLessons, value: '200+', icon: <BookOpen size={24} /> },
