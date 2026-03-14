@@ -11,8 +11,13 @@ const Courses = ({ lang }) => {
   const levels = [
     { id: 'all', name: isAr ? 'الكل' : 'All' },
     { id: 'college', name: isAr ? 'أساسي' : 'Collège' },
-    { id: 'lycee', name: isAr ? 'ثانوي' : 'Lycée' },
-    { id: 'bac', name: 'Bac' },
+    { id: 'lycee_1', name: isAr ? '1 ثانوي' : '1ère' },
+    { id: 'lycee_2_lettre', name: isAr ? '2 آداب' : '2ème Let' },
+    { id: 'lycee_2_science', name: isAr ? '2 علمي' : '2ème Sci' },
+    { id: 'lycee_3_lettre', name: isAr ? '3 آداب' : '3ème Let' },
+    { id: 'lycee_3_science', name: isAr ? '3 علمي' : '3ème Sci' },
+    { id: 'bac_lettre', name: isAr ? 'باك آداب' : 'Bac Let' },
+    { id: 'bac_science', name: isAr ? 'باك علمي' : 'Bac Sci' },
   ];
 
   const courses = [
@@ -29,47 +34,58 @@ const Courses = ({ lang }) => {
     },
     {
       id: 2,
-      title: isAr ? 'التاسعة أساسي: مراجعة القواعد' : '9ème Année: Grammar Pro',
-      level: 'college',
-      lessons: 8,
-      duration: '3h 15m',
-      instructor: 'Miss Rania',
-      image: 'https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?q=80&w=2073&auto=format&fit=crop',
-      tags: ['Grammar', 'Exercises'],
-      color: 'indigo'
-    },
-    {
-      id: 3,
-      title: isAr ? 'الباكالوريا: مهارات الكتابة' : 'Bac: Writing Masterclass',
-      level: 'bac',
-      lessons: 15,
-      duration: '6h 45m',
-      instructor: 'Miss Rania',
-      image: 'https://images.unsplash.com/photo-1455390582262-044cdead277a?q=80&w=2073&auto=format&fit=crop',
-      tags: ['Writing', 'Exam Prep'],
-      color: 'orange'
-    },
-    {
-      id: 4,
-      title: isAr ? 'الثانية ثانوي: القراءة والاستيعاب' : '2ème Année: Reading Skills',
-      level: 'lycee',
+      title: isAr ? '1 ثانوي: تقنيات الاستماع' : '1ère Année: Listening Skills',
+      level: 'lycee_1',
       lessons: 10,
       duration: '5h 00m',
       instructor: 'Miss Rania',
       image: 'https://images.unsplash.com/photo-1512820790803-83ca734da794?q=80&w=2074&auto=format&fit=crop',
-      tags: ['Reading', 'Listening'],
+      tags: ['Listening', 'Basics'],
       color: 'purple'
     },
     {
+      id: 3,
+      title: isAr ? '2 ثانوي علمي: القواعد المتقدمة' : '2ème Sci: Advanced Grammar',
+      level: 'lycee_2_science',
+      lessons: 8,
+      duration: '3h 45m',
+      instructor: 'Miss Rania',
+      image: 'https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?q=80&w=2073&auto=format&fit=crop',
+      tags: ['Grammar', 'Logic'],
+      color: 'indigo'
+    },
+    {
+      id: 4,
+      title: isAr ? '2 ثانوي آداب: الأدب والتحليل' : '2ème Lettre: Literature & Analysis',
+      level: 'lycee_2_lettre',
+      lessons: 14,
+      duration: '7h 20m',
+      instructor: 'Miss Rania',
+      image: 'https://images.unsplash.com/photo-1455390582262-044cdead277a?q=80&w=2073&auto=format&fit=crop',
+      tags: ['Literature', 'Writing'],
+      color: 'emerald'
+    },
+    {
       id: 5,
-      title: isAr ? 'الباكالوريا: مراجعة الأزمنة' : 'Bac: Tenses Review',
-      level: 'bac',
-      lessons: 5,
-      duration: '2h 30m',
+      title: isAr ? 'باك آداب: مراجعة شاملة' : 'Bac Lettre: Full Literature Review',
+      level: 'bac_lettre',
+      lessons: 20,
+      duration: '10h 30m',
       instructor: 'Miss Rania',
       image: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=2022&auto=format&fit=crop',
-      tags: ['Grammar', 'Quiz'],
+      tags: ['Exam Prep', 'Literature'],
       color: 'red'
+    },
+    {
+      id: 6,
+      title: isAr ? 'باك علمي: تقنيات الكتابة العلمية' : 'Bac Scientifique: Scientific Writing',
+      level: 'bac_science',
+      lessons: 15,
+      duration: '6h 15m',
+      instructor: 'Miss Rania',
+      image: 'https://images.unsplash.com/photo-1532094349884-543bc11b234d?q=80&w=2070&auto=format&fit=crop',
+      tags: ['Writing', 'Exam Prep'],
+      color: 'orange'
     }
   ];
 
@@ -126,7 +142,7 @@ const Courses = ({ lang }) => {
               </div>
               <div className="p-8">
                 <div className={`flex items-center justify-between mb-4 text-[10px] font-black text-primary-600 dark:text-primary-400 uppercase tracking-[0.2em] ${isAr ? 'flex-row-reverse' : ''}`}>
-                  <span>{course.level === 'bac' ? 'BAC EXAM PREP' : course.level.toUpperCase()}</span>
+                  <span>{course.level.startsWith('bac') ? 'BAC EXAM PREP' : course.level.replace('lycee_', '').toUpperCase()}</span>
                   <div className={`flex items-center space-x-1 ${isAr ? 'space-x-reverse' : ''}`}>
                     <Clock size={14} />
                     <span>{course.duration}</span>

@@ -245,23 +245,39 @@ const Home = ({ lang }) => {
                 </div>
                 <span>{t.lycee}</span>
               </h3>
-              <ul className="space-y-4 mb-2">
-                {['1ère, 2ème, 3ème année', 'Baccalauréat Preparation'].map((level, i) => (
-                  <li key={i} className="flex items-center space-x-3 rtl:space-x-reverse text-slate-600 dark:text-slate-400">
-                    <CheckCircle size={18} className="text-secondary-500" />
-                    <span>{level}</span>
-                  </li>
-                ))}
-              </ul>
-              <div className="mt-8 mb-10 p-4 rounded-2xl bg-yellow-50 dark:bg-yellow-900/10 border border-yellow-100 dark:border-yellow-900/20">
-                <div className="text-sm font-bold text-yellow-700 dark:text-yellow-500 flex items-center space-x-2 rtl:space-x-reverse mb-1">
-                  <Star size={16} fill="currentColor" />
-                  <span>Special Focus on Bac!</span>
+              
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10">
+                <div className="space-y-4">
+                  <div className="text-sm font-black text-secondary-600 dark:text-secondary-400 uppercase tracking-widest">{t.primary}</div>
+                  <ul className="space-y-2">
+                    <li className="flex items-center space-x-2 rtl:space-x-reverse text-slate-600 dark:text-slate-400 text-sm">
+                      <CheckCircle size={14} className="text-secondary-500" />
+                      <span>{isAr ? "جميع الشعب" : "Toutes sections"}</span>
+                    </li>
+                  </ul>
                 </div>
-                <p className="text-xs text-yellow-600 dark:text-yellow-400/80">
-                  Writing techniques and essay models included.
-                </p>
+
+                <div className="space-y-4">
+                  <div className="text-sm font-black text-secondary-600 dark:text-secondary-400 uppercase tracking-widest">2ème / 3ème</div>
+                  <ul className="space-y-2">
+                    <li className="flex items-center space-x-2 rtl:space-x-reverse text-slate-600 dark:text-slate-400 text-sm">
+                      <CheckCircle size={14} className="text-secondary-500" />
+                      <span>{t.lettre} / {t.scientifique}</span>
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="sm:col-span-2 p-4 rounded-2xl bg-primary-50 dark:bg-primary-900/10 border border-primary-100 dark:border-primary-900/20">
+                  <div className="text-sm font-bold text-primary-700 dark:text-primary-400 flex items-center space-x-2 rtl:space-x-reverse mb-1">
+                    <Star size={16} fill="currentColor" className="text-yellow-500" />
+                    <span>{t.bac} (Lettre & Scientifique)</span>
+                  </div>
+                  <p className="text-xs text-slate-600 dark:text-slate-400">
+                    {isAr ? "تحضير مكثف ومنهجية خاصة بالامتحان الوطني." : "Intensive preparation and special methodology for the National Exam."}
+                  </p>
+                </div>
               </div>
+
               <Link to="/courses" className="btn-secondary inline-block w-full text-center">
                 {isAr ? "ابدأ الآن" : "Start Now"}
               </Link>

@@ -30,7 +30,11 @@ export const translations = {
       whySubtitle: 'Des méthodes modernes et interactives pour réussir vos examens.',
       levelSelectionTitle: 'Choisissez votre niveau d\'études',
       college: 'Collège (7ème - 9ème)',
-      lycee: 'Lycée & Baccalauréat'
+      lycee: 'Lycée',
+      primary: '1ère année',
+      lettre: 'Lettre',
+      scientifique: 'Scientifique',
+      bac: 'Baccalauréat',
     },
     exercises: {
       title: 'Défis & Exercices',
@@ -96,7 +100,11 @@ export const translations = {
       whySubtitle: 'طرق حديثة وتفاعلية للنجاح في امتحاناتك.',
       levelSelectionTitle: 'اختر مستواك التعليمي',
       college: 'الإعدادي (السابعة - التاسعة)',
-      lycee: 'الثانوي والباكالوريا'
+      lycee: 'الثانوي',
+      primary: 'السنة الأولى',
+      lettre: 'آداب',
+      scientifique: 'علمي',
+      bac: 'الباكالوريا',
     },
     exercises: {
       title: 'تحديات وتمارين',
