@@ -56,9 +56,9 @@ const About = ({ lang }) => {
             transition={{ duration: 0.8 }}
             className={`lg:w-1/2 ${isAr ? 'text-right' : ''}`}
           >
-            <h1 className="text-4xl md:text-6xl font-display font-bold mb-6 dark:text-white">
+            <h1 className="text-4xl md:text-7xl font-display font-black mb-8 dark:text-white tracking-tight">
               {t.title.split('Miss Rania')[0]}
-              <span className="gradient-text">Miss Rania</span>
+              <span className="gradient-text drop-shadow-xl">Miss Rania</span>
               {t.title.split('Miss Rania')[1]}
             </h1>
             <p className="text-xl text-slate-600 dark:text-slate-400 mb-8 leading-relaxed">
