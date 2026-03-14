@@ -125,7 +125,7 @@ const Exercises = ({ lang }) => {
                   onClick={handleStartDefault}
                   className="px-8 py-5 rounded-2xl bg-white dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-800 font-bold dark:text-white hover:border-primary-500 transition-all flex flex-col items-center gap-3 group"
                 >
-                  < हेल्पCircle className="text-slate-400 group-hover:text-primary-500 transition-colors" />
+                  <HelpCircle className="text-slate-400 group-hover:text-primary-500 transition-colors" />
                   <span>{t.startChallenge}</span>
                 </button>
                 
