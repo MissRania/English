@@ -201,24 +201,24 @@ const Home = ({ lang }) => {
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
             {content.features.map((feature, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.1 }}
-                whileHover={{ y: -15, scale: 1.02 }}
-                className="p-10 rounded-[40px] bg-slate-50/50 dark:bg-slate-900/30 border border-slate-100 dark:border-primary-900/10 transition-all duration-500 group relative overflow-hidden shiny-effect shadow-sm hover:shadow-2xl"
-              >
-                <div className={`w-20 h-20 rounded-[30px] flex items-center justify-center mb-8 bg-${feature.color}-100 dark:bg-${feature.color}-900/20 transform group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 shadow-inner`}>
-                  {React.cloneElement(feature.icon, { size: 32 })}
-                </div>
-                <h3 className="text-2xl font-black mb-4 dark:text-white tracking-tight">{feature.title}</h3>
-                <p className="text-slate-600 dark:text-slate-400 leading-relaxed font-medium">
-                  {feature.desc}
-                </p>
-                <div className={`absolute -bottom-10 -right-10 w-32 h-32 bg-${feature.color}-400/10 rounded-full blur-3xl transition-opacity group-hover:opacity-100 opacity-50`} />
-              </motion.div>
+              <Card3D key={idx}>
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: idx * 0.1 }}
+                  className="p-10 rounded-[40px] bg-slate-50/50 dark:bg-slate-900/30 border border-slate-100 dark:border-primary-900/10 transition-all duration-500 group relative overflow-hidden shiny-effect shadow-sm hover:shadow-2xl h-full"
+                >
+                  <div className={`w-20 h-20 rounded-[30px] flex items-center justify-center mb-8 bg-${feature.color}-100 dark:bg-${feature.color}-900/20 transform group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 shadow-inner`}>
+                    {React.cloneElement(feature.icon, { size: 32 })}
+                  </div>
+                  <h3 className="text-2xl font-black mb-4 dark:text-white tracking-tight">{feature.title}</h3>
+                  <p className="text-slate-600 dark:text-slate-400 leading-relaxed font-medium">
+                    {feature.desc}
+                  </p>
+                  <div className={`absolute -bottom-10 -right-10 w-32 h-32 bg-${feature.color}-400/10 rounded-full blur-3xl transition-opacity group-hover:opacity-100 opacity-50`} />
+                </motion.div>
+              </Card3D>
             ))}
           </div>
         </div>
