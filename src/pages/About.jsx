@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Star, Heart, Award, BookOpen, GraduationCap, Users } from 'lucide-react';
 import { translations } from '../translations';
 import avatarImg from '../assets/miss-rania.png';
+import Card3D from '../components/Card3D';
 
 const About = ({ lang }) => {
   const isAr = lang === 'ar';
@@ -25,19 +26,21 @@ const About = ({ lang }) => {
             transition={{ duration: 0.8 }}
             className="lg:w-1/2 relative"
           >
-            <div className="relative z-10 rounded-[40px] overflow-hidden shadow-2xl aspect-[4/5] max-w-sm mx-auto">
-              <div className="w-full h-full bg-primary-100 dark:bg-primary-900/40 relative">
-                <img 
-                  src={avatarImg} 
-                  onError={(e) => {
-                    e.target.src = "https://images.unsplash.com/photo-1544717297-fa95b3ee21f3?q=80&w=2070&auto=format&fit=crop";
-                    e.target.onerror = null;
-                  }}
-                  alt="Miss Rania" 
-                  className="w-full h-full object-cover grayscale-0 hover:scale-105 transition-transform duration-700"
-                />
+            <Card3D>
+              <div className="relative z-10 rounded-[40px] overflow-hidden shadow-2xl aspect-[4/5] max-w-sm mx-auto">
+                <div className="w-full h-full bg-primary-100 dark:bg-primary-900/40 relative">
+                  <img 
+                    src={avatarImg} 
+                    onError={(e) => {
+                      e.target.src = "https://images.unsplash.com/photo-1544717297-fa95b3ee21f3?q=80&w=2070&auto=format&fit=crop";
+                      e.target.onerror = null;
+                    }}
+                    alt="Miss Rania" 
+                    className="w-full h-full object-cover grayscale-0 hover:scale-105 transition-transform duration-700"
+                  />
+                </div>
               </div>
-            </div>
+            </Card3D>
             <div className="absolute -top-10 -left-10 w-40 h-40 bg-primary-200/50 rounded-full blur-3xl -z-10" />
             <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-secondary-200/50 rounded-full blur-3xl -z-10" />
             

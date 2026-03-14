@@ -106,13 +106,19 @@ const Home = ({ lang }) => {
                 </Link>
               </div>
 
-              {/* Trust Badge */}
-              <div className="mt-12 flex items-center justify-center lg:justify-start space-x-4 space-x-reverse opacity-70">
-                <Users className="text-slate-400" />
-                <span className="text-slate-500 dark:text-slate-400 font-medium">
-                  {t.trustBadge}
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                className="inline-flex items-center space-x-2 bg-primary-100/80 dark:bg-primary-900/40 backdrop-blur-md px-6 py-3 rounded-2xl mb-10 border border-primary-200 dark:border-primary-800 shadow-xl shadow-primary-500/10 group"
+              >
+                <div className="w-10 h-10 bg-white dark:bg-slate-900 rounded-xl flex items-center justify-center shadow-lg group-hover:rotate-12 transition-transform">
+                  <Award className="text-primary-600" size={20} />
+                </div>
+                <span className="text-primary-900 dark:text-primary-100 font-black text-xs tracking-widest uppercase">
+                  Agrégée • +20 ans d'expérience
                 </span>
-              </div>
+              </motion.div>
             </motion.div>
 
             {/* Hero Image / 3D Avatar Placeholder */}
@@ -125,9 +131,21 @@ const Home = ({ lang }) => {
               <div className="relative z-10 w-full aspect-square max-w-[500px] mx-auto">
                 {/* 3D-like Card for Avatar Placeholder */}
                 <motion.div 
-                  animate={{ y: [0, -20, 0] }}
-                  transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                  initial={{ rotateY: -30, rotateX: 20, z: -100, opacity: 0 }}
+                  animate={{ 
+                    rotateY: 0, 
+                    rotateX: 0, 
+                    z: 0, 
+                    opacity: 1,
+                    y: [0, -20, 0] 
+                  }}
+                  transition={{ 
+                    duration: 1.2, 
+                    ease: "easeOut",
+                    y: { duration: 6, repeat: Infinity, ease: "easeInOut" }
+                  }}
                   className="w-full h-full rounded-3xl bg-gradient-to-br from-primary-100 to-secondary-100 dark:from-primary-900/40 dark:to-secondary-900/40 p-1 shadow-2xl overflow-hidden glass-card relative group"
+                  style={{ transformStyle: "preserve-3d" }}
                 >
                   <div className="w-full h-full rounded-2xl bg-white/40 dark:bg-slate-900/40 flex items-center justify-center relative overflow-hidden">
                     {/* Placeholder for Pixar Avatar */}
@@ -203,11 +221,12 @@ const Home = ({ lang }) => {
             {content.features.map((feature, idx) => (
               <Card3D key={idx}>
                 <motion.div
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: idx * 0.1 }}
+                  initial={{ opacity: 0, rotateY: 45, translateZ: -100 }}
+                  whileInView={{ opacity: 1, rotateY: 0, translateZ: 0 }}
+                  viewport={{ once: true, margin: "-100px" }}
+                  transition={{ delay: idx * 0.1, duration: 0.8 }}
                   className="p-10 rounded-[40px] bg-slate-50/50 dark:bg-slate-900/30 border border-slate-100 dark:border-primary-900/10 transition-all duration-500 group relative overflow-hidden shiny-effect shadow-sm hover:shadow-2xl h-full"
+                  style={{ transformStyle: "preserve-3d" }}
                 >
                   <div className={`w-20 h-20 rounded-[30px] flex items-center justify-center mb-8 bg-${feature.color}-100 dark:bg-${feature.color}-900/20 transform group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 shadow-inner`}>
                     {React.cloneElement(feature.icon, { size: 32 })}
@@ -233,79 +252,83 @@ const Home = ({ lang }) => {
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             {/* Collège */}
-            <motion.div 
-              whileHover={{ scale: 1.02 }}
-              className="glass-card dark:glass-card-dark rounded-3xl p-10 text-left rtl:text-right overflow-hidden relative group"
-            >
-              <div className="absolute top-0 right-0 w-32 h-32 bg-primary-500/10 rounded-full blur-2xl group-hover:bg-primary-500/20 transition-colors" />
-              <h3 className="text-2xl font-bold mb-6 flex items-center space-x-3 rtl:space-x-reverse dark:text-white">
-                <div className="p-3 rounded-xl bg-primary-100 dark:bg-primary-900/30 text-primary-600">
-                  <BookOpen size={24} />
-                </div>
-                <span>{t.college}</span>
-              </h3>
-              <ul className="space-y-4 mb-10">
-                {['7ème année', '8ème année', '9ème année'].map((level, i) => (
-                  <li key={i} className="flex items-center space-x-3 rtl:space-x-reverse text-slate-600 dark:text-slate-400">
-                    <CheckCircle size={18} className="text-primary-500" />
-                    <span>{level}</span>
-                  </li>
-                ))}
-              </ul>
-              <Link to="/courses" className="btn-primary inline-block w-full text-center">
-                {isAr ? "استكشف الدروس" : "Explore Lessons"}
-              </Link>
-            </motion.div>
+            <Card3D>
+              <motion.div 
+                whileHover={{ scale: 1.02 }}
+                className="glass-card dark:glass-card-dark rounded-3xl p-10 text-left rtl:text-right overflow-hidden relative group h-full"
+              >
+                <div className="absolute top-0 right-0 w-32 h-32 bg-primary-500/10 rounded-full blur-2xl group-hover:bg-primary-500/20 transition-colors" />
+                <h3 className="text-2xl font-bold mb-6 flex items-center space-x-3 rtl:space-x-reverse dark:text-white">
+                  <div className="p-3 rounded-xl bg-primary-100 dark:bg-primary-900/30 text-primary-600">
+                    <BookOpen size={24} />
+                  </div>
+                  <span>{t.college}</span>
+                </h3>
+                <ul className="space-y-4 mb-10">
+                  {['7ème année', '8ème année', '9ème année'].map((level, i) => (
+                    <li key={i} className="flex items-center space-x-3 rtl:space-x-reverse text-slate-600 dark:text-slate-400">
+                      <CheckCircle size={18} className="text-primary-500" />
+                      <span>{level}</span>
+                    </li>
+                  ))}
+                </ul>
+                <Link to="/courses" className="btn-primary inline-block w-full text-center">
+                  {isAr ? "استكشف الدروس" : "Explore Lessons"}
+                </Link>
+              </motion.div>
+            </Card3D>
 
             {/* Lycée */}
-            <motion.div 
-              whileHover={{ scale: 1.02 }}
-              className="glass-card dark:glass-card-dark rounded-3xl p-10 text-left rtl:text-right overflow-hidden relative group"
-            >
-              <div className="absolute top-0 right-0 w-32 h-32 bg-secondary-500/10 rounded-full blur-2xl group-hover:bg-secondary-500/20 transition-colors" />
-              <h3 className="text-2xl font-bold mb-6 flex items-center space-x-3 rtl:space-x-reverse dark:text-white">
-                <div className="p-3 rounded-xl bg-secondary-100 dark:bg-secondary-900/30 text-secondary-600">
-                  <GraduationCap size={24} />
-                </div>
-                <span>{t.lycee}</span>
-              </h3>
-              
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10">
-                <div className="space-y-4">
-                  <div className="text-sm font-black text-secondary-600 dark:text-secondary-400 uppercase tracking-widest">{t.primary}</div>
-                  <ul className="space-y-2">
-                    <li className="flex items-center space-x-2 rtl:space-x-reverse text-slate-600 dark:text-slate-400 text-sm">
-                      <CheckCircle size={14} className="text-secondary-500" />
-                      <span>{isAr ? "جميع الشعب" : "Toutes sections"}</span>
-                    </li>
-                  </ul>
-                </div>
-
-                <div className="space-y-4">
-                  <div className="text-sm font-black text-secondary-600 dark:text-secondary-400 uppercase tracking-widest">2ème / 3ème</div>
-                  <ul className="space-y-2">
-                    <li className="flex items-center space-x-2 rtl:space-x-reverse text-slate-600 dark:text-slate-400 text-sm">
-                      <CheckCircle size={14} className="text-secondary-500" />
-                      <span>{t.lettre} / {t.scientifique}</span>
-                    </li>
-                  </ul>
-                </div>
-
-                <div className="sm:col-span-2 p-4 rounded-2xl bg-primary-50 dark:bg-primary-900/10 border border-primary-100 dark:border-primary-900/20">
-                  <div className="text-sm font-bold text-primary-700 dark:text-primary-400 flex items-center space-x-2 rtl:space-x-reverse mb-1">
-                    <Star size={16} fill="currentColor" className="text-yellow-500" />
-                    <span>{t.bac} (Lettre & Scientifique)</span>
+            <Card3D>
+              <motion.div 
+                whileHover={{ scale: 1.02 }}
+                className="glass-card dark:glass-card-dark rounded-3xl p-10 text-left rtl:text-right overflow-hidden relative group h-full"
+              >
+                <div className="absolute top-0 right-0 w-32 h-32 bg-secondary-500/10 rounded-full blur-2xl group-hover:bg-secondary-500/20 transition-colors" />
+                <h3 className="text-2xl font-bold mb-6 flex items-center space-x-3 rtl:space-x-reverse dark:text-white">
+                  <div className="p-3 rounded-xl bg-secondary-100 dark:bg-secondary-900/30 text-secondary-600">
+                    <GraduationCap size={24} />
                   </div>
-                  <p className="text-xs text-slate-600 dark:text-slate-400">
-                    {isAr ? "تحضير مكثف ومنهجية خاصة بالامتحان الوطني." : "Intensive preparation and special methodology for the National Exam."}
-                  </p>
-                </div>
-              </div>
+                  <span>{t.lycee}</span>
+                </h3>
+                
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10">
+                  <div className="space-y-4">
+                    <div className="text-sm font-black text-secondary-600 dark:text-secondary-400 uppercase tracking-widest">{t.primary}</div>
+                    <ul className="space-y-2">
+                      <li className="flex items-center space-x-2 rtl:space-x-reverse text-slate-600 dark:text-slate-400 text-sm">
+                        <CheckCircle size={14} className="text-secondary-500" />
+                        <span>{isAr ? "جميع الشعب" : "Toutes sections"}</span>
+                      </li>
+                    </ul>
+                  </div>
 
-              <Link to="/courses" className="btn-secondary inline-block w-full text-center">
-                {isAr ? "ابدأ الآن" : "Start Now"}
-              </Link>
-            </motion.div>
+                  <div className="space-y-4">
+                    <div className="text-sm font-black text-secondary-600 dark:text-secondary-400 uppercase tracking-widest">2ème / 3ème</div>
+                    <ul className="space-y-2">
+                      <li className="flex items-center space-x-2 rtl:space-x-reverse text-slate-600 dark:text-slate-400 text-sm">
+                        <CheckCircle size={14} className="text-secondary-500" />
+                        <span>{t.lettre} / {t.scientifique}</span>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div className="sm:col-span-2 p-4 rounded-2xl bg-primary-50 dark:bg-primary-900/10 border border-primary-100 dark:border-primary-900/20">
+                    <div className="text-sm font-bold text-primary-700 dark:text-primary-400 flex items-center space-x-2 rtl:space-x-reverse mb-1">
+                      <Star size={16} fill="currentColor" className="text-yellow-500" />
+                      <span>{t.bac} (Lettre & Scientifique)</span>
+                    </div>
+                    <p className="text-xs text-slate-600 dark:text-slate-400">
+                      {isAr ? "تحضير مكثف ومنهجية خاصة بالامتحان الوطني." : "Intensive preparation and special methodology for the National Exam."}
+                    </p>
+                  </div>
+                </div>
+
+                <Link to="/courses" className="btn-secondary inline-block w-full text-center">
+                  {isAr ? "ابدأ الآن" : "Start Now"}
+                </Link>
+              </motion.div>
+            </Card3D>
           </div>
         </div>
       </section>
