@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, BookOpen, GraduationCap, CheckCircle, Star, Users, Brain, Zap } from 'lucide-react';
+import { ArrowRight, BookOpen, GraduationCap, CheckCircle, Star, Users, Brain, Zap, Award } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { translations } from '../translations';
 import avatarImg from '../assets/miss-rania.png';
@@ -88,9 +88,9 @@ const Home = ({ lang }) => {
               </motion.div>
               
               <h1 className="text-6xl md:text-8xl font-display font-black leading-[1.1] mb-8 dark:text-white tracking-tight">
-                {t.heroTitle.split('Miss Rania')[0]}
-                <span className="gradient-text drop-shadow-[0_0_30px_rgba(99,102,241,0.3)]">Miss Rania</span>
-                {t.heroTitle.split('Miss Rania')[1]}
+                {t.heroTitle.split(isAr ? 'ميس رانيا' : 'Miss Rania')[0]}
+                <span className="gradient-text drop-shadow-[0_0_30px_rgba(99,102,241,0.3)]">{isAr ? 'ميس رانيا' : 'Miss Rania'}</span>
+                {t.heroTitle.split(isAr ? 'ميس رانيا' : 'Miss Rania')[1]}
               </h1>
               
               <p className="text-xl text-slate-600 dark:text-slate-400 mb-10 max-w-xl mx-auto lg:mx-0">
