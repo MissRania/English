@@ -1,22 +1,24 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Book, ChevronRight, Search, FileText, Play, Download, Clock } from 'lucide-react';
+import { Book, ChevronRight, Search, FileText, Play, Download, Clock, Star } from 'lucide-react';
+import { translations } from '../translations';
 
 const Courses = ({ lang }) => {
   const [activeLevel, setActiveLevel] = useState('all');
   const isAr = lang === 'ar';
+  const t = translations[lang === 'fr' ? 'fr' : 'ar'].nav;
 
   const levels = [
     { id: 'all', name: isAr ? 'الكل' : 'All' },
-    { id: 'college', name: 'Collège' },
-    { id: 'lycee', name: 'Lycée' },
+    { id: 'college', name: isAr ? 'أساسي' : 'Collège' },
+    { id: 'lycee', name: isAr ? 'ثانوي' : 'Lycée' },
     { id: 'bac', name: 'Bac' },
   ];
 
   const courses = [
     {
       id: 1,
-      title: '7ème Année: Unit 1 - Family Life',
+      title: isAr ? 'السابعة أساسي: الوحدة 1 - الحياة العائلية' : '7ème Année: Unit 1 - Family Life',
       level: 'college',
       lessons: 12,
       duration: '4h 30m',
@@ -27,7 +29,7 @@ const Courses = ({ lang }) => {
     },
     {
       id: 2,
-      title: '9ème Année: Grammar Pro',
+      title: isAr ? 'التاسعة أساسي: مراجعة القواعد' : '9ème Année: Grammar Pro',
       level: 'college',
       lessons: 8,
       duration: '3h 15m',
@@ -38,7 +40,7 @@ const Courses = ({ lang }) => {
     },
     {
       id: 3,
-      title: 'Bac: Writing Masterclass',
+      title: isAr ? 'الباكالوريا: مهارات الكتابة' : 'Bac: Writing Masterclass',
       level: 'bac',
       lessons: 15,
       duration: '6h 45m',
@@ -49,7 +51,7 @@ const Courses = ({ lang }) => {
     },
     {
       id: 4,
-      title: '2ème Année: Reading Skills',
+      title: isAr ? 'الثانية ثانوي: القراءة والاستيعاب' : '2ème Année: Reading Skills',
       level: 'lycee',
       lessons: 10,
       duration: '5h 00m',
@@ -60,7 +62,7 @@ const Courses = ({ lang }) => {
     },
     {
       id: 5,
-      title: 'Bac: Tenses Review',
+      title: isAr ? 'الباكالوريا: مراجعة الأزمنة' : 'Bac: Tenses Review',
       level: 'bac',
       lessons: 5,
       duration: '2h 30m',
@@ -78,22 +80,22 @@ const Courses = ({ lang }) => {
   return (
     <div className="pt-24 pb-20 min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
-          <div className="max-w-xl">
-            <h1 className="text-4xl font-display font-bold mb-4 dark:text-white">
-              {isAr ? "استكشف الكورسات" : "Explore Courses"}
+        <div className={`flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6 ${isAr ? 'md:flex-row-reverse' : ''}`}>
+          <div className={`max-w-xl ${isAr ? 'text-right' : ''}`}>
+            <h1 className="text-4xl md:text-5xl font-display font-bold mb-4 dark:text-white">
+              {isAr ? "استكشف الدروس" : "Explore Courses"}
             </h1>
-            <p className="text-slate-600 dark:text-slate-400">
+            <p className="text-slate-600 dark:text-slate-400 text-lg">
               {isAr ? "دروس منظمة حسب البرنامج الرسمي التونسي لكل المستويات." : "Structured lessons according to the official Tunisian program for all levels."}
             </p>
           </div>
           
-          <div className="flex items-center space-x-2 bg-slate-100 dark:bg-slate-900 p-1 rounded-2xl">
+          <div className="flex items-center space-x-2 bg-slate-100 dark:bg-slate-900 p-1 rounded-2xl shadow-inner">
             {levels.map((level) => (
               <button
                 key={level.id}
                 onClick={() => setActiveLevel(level.id)}
-                className={`px-6 py-2 rounded-xl text-sm font-semibold transition-all duration-300 ${activeLevel === level.id ? 'bg-white dark:bg-slate-800 text-primary-600 shadow-sm' : 'text-slate-500 hover:text-slate-700 dark:hover:text-slate-300'}`}
+                className={`px-6 py-2 rounded-xl text-sm font-bold transition-all duration-300 ${activeLevel === level.id ? 'bg-white dark:bg-slate-800 text-primary-600 shadow-md transform scale-105' : 'text-slate-500 hover:text-slate-700 dark:hover:text-slate-300'}`}
               >
                 {level.name}
               </button>
@@ -101,7 +103,7 @@ const Courses = ({ lang }) => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
           {filteredCourses.map((course) => (
             <motion.div
               layout
@@ -109,38 +111,42 @@ const Courses = ({ lang }) => {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.3 }}
-              className="glass-card dark:glass-card-dark rounded-3xl overflow-hidden group border-transparent hover:border-primary-500/20 transition-all cursor-pointer"
+              className="glass-card dark:glass-card-dark rounded-[32px] overflow-hidden group border-2 border-transparent hover:border-primary-500/20 transition-all cursor-pointer shadow-xl hover:shadow-2xl"
             >
-              <div className="h-48 overflow-hidden relative">
+              <div className="h-56 overflow-hidden relative">
                 <img src={course.image} alt={course.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                <div className="absolute bottom-4 left-4 flex gap-2">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                <div className={`absolute bottom-4 ${isAr ? 'right-4 flex-row-reverse' : 'left-4'} flex gap-2`}>
                   {course.tags.map(tag => (
-                    <span key={tag} className="px-2 py-1 rounded-lg bg-white/20 backdrop-blur-md text-white text-[10px] uppercase font-bold tracking-wider border border-white/20">
+                    <span key={tag} className="px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-white text-[10px] uppercase font-bold tracking-wider border border-white/20">
                       {tag}
                     </span>
                   ))}
                 </div>
               </div>
-              <div className="p-6">
-                <div className="flex items-center justify-between mb-3 text-xs font-bold text-primary-600 dark:text-primary-400 uppercase tracking-widest">
-                  <span>{course.level.toUpperCase()}</span>
-                  <div className="flex items-center space-x-1">
+              <div className="p-8">
+                <div className={`flex items-center justify-between mb-4 text-[10px] font-black text-primary-600 dark:text-primary-400 uppercase tracking-[0.2em] ${isAr ? 'flex-row-reverse' : ''}`}>
+                  <span>{course.level === 'bac' ? 'BAC EXAM PREP' : course.level.toUpperCase()}</span>
+                  <div className={`flex items-center space-x-1 ${isAr ? 'space-x-reverse' : ''}`}>
                     <Clock size={14} />
                     <span>{course.duration}</span>
                   </div>
                 </div>
-                <h3 className="text-xl font-bold mb-4 dark:text-white group-hover:text-primary-600 transition-colors">
+                <h3 className={`text-2xl font-bold mb-6 dark:text-white group-hover:text-primary-600 transition-colors leading-snug ${isAr ? 'text-right' : ''}`}>
                   {course.title}
                 </h3>
-                <div className="flex items-center justify-between pt-4 border-t dark:border-slate-800">
-                  <div className="flex items-center space-x-2">
-                    <div className="w-8 h-8 rounded-full bg-slate-200 dark:bg-slate-800" />
-                    <span className="text-sm font-medium text-slate-700 dark:text-slate-300">Miss Rania</span>
+                <div className={`flex items-center justify-between pt-6 border-t dark:border-slate-800 ${isAr ? 'flex-row-reverse' : ''}`}>
+                  <div className={`flex items-center space-x-3 ${isAr ? 'space-x-reverse' : ''}`}>
+                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary-400 to-secondary-400 p-0.5 shadow-md">
+                      <div className="w-full h-full rounded-full bg-white dark:bg-slate-900 flex items-center justify-center font-bold text-primary-600 text-xs">
+                        R
+                      </div>
+                    </div>
+                    <span className="text-sm font-bold text-slate-700 dark:text-slate-300">Miss Rania</span>
                   </div>
-                  <div className="flex items-center space-x-1 text-primary-600 font-bold group-hover:translate-x-1 transition-transform">
-                    <span className="text-sm">{isAr ? "ابدأ" : "Start"}</span>
-                    <ChevronRight size={18} />
+                  <div className={`flex items-center space-x-1 text-primary-600 font-bold group-hover:${isAr ? '-translate-x-2' : 'translate-x-2'} transition-transform ${isAr ? 'flex-row-reverse space-x-reverse' : ''}`}>
+                    <span className="text-sm">{isAr ? "ابدأ الدرس" : "Start Lesson"}</span>
+                    <ChevronRight size={20} className={isAr ? 'rotate-180' : ''} />
                   </div>
                 </div>
               </div>
@@ -153,3 +159,4 @@ const Courses = ({ lang }) => {
 };
 
 export default Courses;
+

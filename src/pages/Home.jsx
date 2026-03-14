@@ -2,16 +2,19 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, BookOpen, GraduationCap, CheckCircle, Star, Users, Brain, Zap } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { translations } from '../translations';
 
 const Home = ({ lang }) => {
   const isAr = lang === 'ar';
+  const t = translations[lang === 'fr' ? 'fr' : 'ar'].home;
+  const common = translations[lang === 'fr' ? 'fr' : 'ar'].common;
 
   const content = {
     hero: {
-      title: isAr ? "تعلم الإنجليزية مع ميس رانيا" : "Learn English with Miss Rania",
-      subtitle: isAr ? "دروس إنجليزية للطلاب التونسيين من الإعدادي إلى الباك" : "English lessons for Tunisian students from collège to Bac",
-      cta1: isAr ? "ابدأ التعلم" : "Start Learning",
-      cta2: isAr ? "تحضير الباك" : "Bac Preparation",
+      title: t.heroTitle,
+      subtitle: t.heroSubtitle,
+      cta1: t.cta1,
+      cta2: t.cta2,
     },
     features: [
       {
@@ -75,21 +78,22 @@ const Home = ({ lang }) => {
               </motion.div>
               
               <h1 className="text-5xl md:text-7xl font-display font-bold leading-tight mb-6 dark:text-white">
-                {isAr ? "تعلم الإنجليزية مع " : "Learn English with "}
+                {t.heroTitle.split('Miss Rania')[0]}
                 <span className="gradient-text">Miss Rania</span>
+                {t.heroTitle.split('Miss Rania')[1]}
               </h1>
               
               <p className="text-xl text-slate-600 dark:text-slate-400 mb-10 max-w-xl mx-auto lg:mx-0">
-                {content.hero.subtitle}
+                {t.heroSubtitle}
               </p>
               
               <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4">
                 <Link to="/courses" className="btn-primary flex items-center space-x-2">
-                  <span>{content.hero.cta1}</span>
+                  <span>{t.cta1}</span>
                   <ArrowRight size={20} className={isAr ? "rotate-180" : ""} />
                 </Link>
                 <Link to="/bac-prep" className="px-6 py-3 rounded-full border-2 border-primary-600/20 text-primary-600 font-semibold hover:bg-primary-50 transition-all dark:border-primary-500/30 dark:text-primary-400 dark:hover:bg-primary-950/20">
-                  {content.hero.cta2}
+                  {t.cta2}
                 </Link>
               </div>
 
@@ -97,7 +101,7 @@ const Home = ({ lang }) => {
               <div className="mt-12 flex items-center justify-center lg:justify-start space-x-4 space-x-reverse opacity-70">
                 <Users className="text-slate-400" />
                 <span className="text-slate-500 dark:text-slate-400 font-medium">
-                  {isAr ? "+5000 طالب نشط" : "+5000 Active Students"}
+                  {t.trustBadge}
                 </span>
               </div>
             </motion.div>
@@ -159,10 +163,10 @@ const Home = ({ lang }) => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-display font-bold mb-4 dark:text-white">
-              {isAr ? "لماذا تختار منصتنا؟" : "Why Choose Our Platform?"}
+              {t.whyTitle}
             </h2>
             <p className="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
-              {isAr ? "نحن نوفر لك كل ما تحتاجه للنجاح في اللغة الإنجليزية بأحدث الطرق العلمية والترفيهية." : "We provide everything you need to succeed in English using the latest scientific and entertaining methods."}
+              {t.whySubtitle}
             </p>
           </div>
 
@@ -190,7 +194,7 @@ const Home = ({ lang }) => {
       <section className="py-24 bg-slate-50 dark:bg-slate-900/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-5xl font-display font-bold mb-12 dark:text-white">
-            {isAr ? "اختر مستواك التعليمي" : "Choose Your Educational Level"}
+            {t.levelSelectionTitle}
           </h2>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
@@ -204,7 +208,7 @@ const Home = ({ lang }) => {
                 <div className="p-3 rounded-xl bg-primary-100 dark:bg-primary-900/30 text-primary-600">
                   <BookOpen size={24} />
                 </div>
-                <span>Collège</span>
+                <span>{t.college}</span>
               </h3>
               <ul className="space-y-4 mb-10">
                 {['7ème année', '8ème année', '9ème année'].map((level, i) => (
@@ -229,7 +233,7 @@ const Home = ({ lang }) => {
                 <div className="p-3 rounded-xl bg-secondary-100 dark:bg-secondary-900/30 text-secondary-600">
                   <GraduationCap size={24} />
                 </div>
-                <span>Lycée</span>
+                <span>{t.lycee}</span>
               </h3>
               <ul className="space-y-4 mb-2">
                 {['1ère, 2ème, 3ème année', 'Baccalauréat Preparation'].map((level, i) => (
@@ -260,3 +264,4 @@ const Home = ({ lang }) => {
 };
 
 export default Home;
+

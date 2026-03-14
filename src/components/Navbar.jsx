@@ -2,11 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, BookOpen, GraduationCap, FileText, LayoutDashboard, Info, Mail, Moon, Sun, Search, Globe } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { translations } from '../translations';
 
 const Navbar = ({ darkMode, toggleDarkMode, lang, setLang }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
+
+  const t = translations[lang === 'fr' ? 'fr' : 'ar'].nav;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -17,12 +20,12 @@ const Navbar = ({ darkMode, toggleDarkMode, lang, setLang }) => {
   }, []);
 
   const navLinks = [
-    { name: lang === 'fr' ? 'Accueil' : 'Home', path: '/', icon: <BookOpen size={18} /> },
-    { name: lang === 'fr' ? 'Cours' : 'Courses', path: '/courses', icon: <GraduationCap size={18} /> },
-    { name: lang === 'fr' ? 'Exercices' : 'Exercises', path: '/exercises', icon: <FileText size={18} /> },
-    { name: 'Bac Prep', path: '/bac-prep', icon: <GraduationCap size={18} /> },
-    { name: lang === 'fr' ? 'Ressources' : 'Resources', path: '/resources', icon: <FileText size={18} /> },
-    { name: lang === 'fr' ? 'A Propos' : 'About', path: '/about', icon: <Info size={18} /> },
+    { name: t.home, path: '/', icon: <BookOpen size={18} /> },
+    { name: t.courses, path: '/courses', icon: <GraduationCap size={18} /> },
+    { name: t.exercises, path: '/exercises', icon: <FileText size={18} /> },
+    { name: t.bacPrep, path: '/bac-prep', icon: <GraduationCap size={18} /> },
+    { name: t.resources, path: '/resources', icon: <FileText size={18} /> },
+    { name: t.about, path: '/about', icon: <Info size={18} /> },
   ];
 
   const handleToggleLang = () => {
@@ -61,10 +64,11 @@ const Navbar = ({ darkMode, toggleDarkMode, lang, setLang }) => {
           <div className="hidden lg:flex items-center space-x-3">
             <button
               onClick={handleToggleLang}
-              className="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors dark:text-white"
+              className="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors dark:text-white flex items-center space-x-2 font-bold text-xs"
               title="Toggle Language"
             >
-              <Globe size={20} />
+              <Globe size={18} />
+              <span>{lang.toUpperCase()}</span>
             </button>
             <button
               onClick={toggleDarkMode}
@@ -72,11 +76,11 @@ const Navbar = ({ darkMode, toggleDarkMode, lang, setLang }) => {
             >
               {darkMode ? <Sun size={20} /> : <Moon size={20} />}
             </button>
-            <Link to="/dashboard" className="p-2 rounded-full bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 transition-colors dark:text-slate-300">
+            <Link to="/dashboard" className="p-2 rounded-full bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 transition-colors dark:text-slate-300" title={t.dashboard}>
               <LayoutDashboard size={20} />
             </Link>
             <Link to="/contact" className="btn-primary py-2 px-5 text-sm">
-              Contact
+              {t.contact}
             </Link>
           </div>
 
@@ -130,7 +134,7 @@ const Navbar = ({ darkMode, toggleDarkMode, lang, setLang }) => {
                   className="flex items-center space-x-2 px-3 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 dark:text-white"
                 >
                   <LayoutDashboard size={18} />
-                  <span>Dashboard</span>
+                  <span>{t.dashboard}</span>
                 </Link>
               </div>
               <div className="px-3 pb-3">
@@ -139,7 +143,7 @@ const Navbar = ({ darkMode, toggleDarkMode, lang, setLang }) => {
                   onClick={() => setIsOpen(false)}
                   className="btn-primary w-full text-center block"
                 >
-                  Contact
+                  {t.contact}
                 </Link>
               </div>
             </div>
@@ -151,3 +155,4 @@ const Navbar = ({ darkMode, toggleDarkMode, lang, setLang }) => {
 };
 
 export default Navbar;
+

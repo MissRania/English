@@ -2,6 +2,7 @@
   "name": "flutter_application_1",
   "private": true,
   "version": "0.0.0",
+  "homepage": "https://MissRania.github.io/Learn-English/",
   "type": "module",
   "scripts": {
     "dev": "vite",
