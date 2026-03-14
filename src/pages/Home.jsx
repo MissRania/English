@@ -4,6 +4,7 @@ import { ArrowRight, BookOpen, GraduationCap, CheckCircle, Star, Users, Brain, Z
 import { Link } from 'react-router-dom';
 import { translations } from '../translations';
 import avatarImg from '../assets/miss-rania.png';
+import Card3D from '../components/Card3D';
 
 const Home = ({ lang }) => {
   const isAr = lang === 'ar';
